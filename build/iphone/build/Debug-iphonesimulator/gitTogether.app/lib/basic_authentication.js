@@ -1,0 +1,1 @@
+/Users/lpaulger/Documents/Titanium Studio Workspace/gitTogether/Resources/lib/basic_authentication.js

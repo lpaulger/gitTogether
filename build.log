@@ -1,0 +1,11 @@
+Logfile initialized
+[INFO] logfile = /Users/lpaulger/Documents/Titanium Studio Workspace/gitTogether/build.log
+[DEBUG] /Users/lpaulger/Library/Application Support/Titanium/mobilesdk/osx/2.0.1.GA2/android/builder.py emulator gitTogether /Users/lpaulger/Documents/Android /Users/lpaulger/Documents/Titanium Studio Workspace/gitTogether com.lpprojects.gitTogether 17 WVGA854
+[INFO] Launching Android emulator...one moment
+[DEBUG] From: /Users/lpaulger/Documents/Android/tools/emulator
+[DEBUG] SDCard: /Users/lpaulger/.titanium/android2.sdcard
+[DEBUG] AVD ID: 17
+[DEBUG] AVD Skin: WVGA854
+[DEBUG] SDK: /Users/lpaulger/Documents/Android
+[DEBUG] /Users/lpaulger/Documents/Android/tools/emulator -avd titanium_17_WVGA854 -port 5560 -sdcard /Users/lpaulger/.titanium/titanium_17_WVGA854.sdcard -logcat *:d,* -no-boot-anim -partition-size 128
+[INFO] Android Emulator has exited

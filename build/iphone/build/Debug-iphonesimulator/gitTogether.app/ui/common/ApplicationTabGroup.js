@@ -1,0 +1,1 @@
+/Users/lpaulger/Documents/Titanium Studio Workspace/gitTogether/Resources/ui/common/ApplicationTabGroup.js
