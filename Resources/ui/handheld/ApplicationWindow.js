@@ -3,14 +3,26 @@ var tableSize = 0;
 function ApplicationWindow(title) {
 	var repo = require("logic/repo_logic");
 	var user = require("logic/users_logic");
-
+	
+	var applicationPrimaryWindow = Ti.UI.createWindow({
+		navBarHidden: true
+	});
+	
 	var self = Ti.UI.createWindow({
 		title : L('Home_Page_Title'),
 		barColor : 'gray',
 		backgroundColor : 'white',
 		modal : true
 	});
+	
+	
+	
+	var nav = Ti.UI.iPhone.createNavigationGroup({
+		window : self
+	});
 
+	applicationPrimaryWindow.add(nav);
+	
 	var UserInfoContainerView = Ti.UI.createView({
 		height : 140
 	});
@@ -148,8 +160,12 @@ function ApplicationWindow(title) {
 			picker_view.animate(slide_in);
 		} else {
 			//TODO load event details window
-			alert("event by: " + e.rowData.data.actor.login);
-			Ti.API.info(e.rowData.data);
+			//alert("event by: " + e.rowData.data.actor.login);
+			
+
+			var eventWindow = require('ui/handheld/EventsWindow');
+
+			nav.open(eventWindow(e.rowData.data), {animated:true});
 		}
 	});
 
@@ -177,7 +193,7 @@ function ApplicationWindow(title) {
 							height : 100,
 							className : 'datarow',
 							clickname : 'row',
-							data: repoEvents[i]
+							data : repoEvents[i]
 						});
 						var eventNameLabel = Ti.UI.createLabel({
 							color : '#576996',
@@ -323,6 +339,6 @@ function ApplicationWindow(title) {
 		self.add(picker_view);
 	});
 
-	return self;
+	return applicationPrimaryWindow;
 };
 module.exports = ApplicationWindow;
