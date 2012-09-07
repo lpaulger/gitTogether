@@ -1,1 +1,1 @@
-define({"home": "Home", "newWindow": "New Window", "openWindow": "Open New Window", "settings": "Settings"});
+define({"home": "Home", "newWindow": "New Window", "Home_Page_Title": "gitTogether", "openWindow": "Open New Window", "settings": "Settings"});

@@ -33,6 +33,19 @@ exports.getRepo = function(repoName, callback) {
 	});
 }
 
+exports.getRepoEvents = function(username, repoName, callback){
+	var url = "repos/" + username + "/" + repoName + "/events";
+	var ws = require("data/webService");
+	ws.getRequest(url, function(data) {
+		//Ti.API.debug(data);
+		Ti.API.debug("results length: " + data.length);
+		for(var i = 0; i < data.length; i++) {
+			//Ti.API.debug("REPO: " + data[i].name);
+		}
+		callback(data);
+	});
+};
+
 exports.saveCurrentRepo = function(repoId, callback){
 	
 }

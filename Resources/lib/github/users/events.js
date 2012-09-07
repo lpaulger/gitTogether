@@ -1,31 +1,35 @@
-exports.applyTemplate = function(events) {
-	var eventsFormatted = [];
-	Ti.API.debug("events.applyTempate...");
+/*
+ * This Class will process an event object from github and return a gitTogether useable object within the app
+ */
 
-	for (var i = 0; i < events.length; i++) {
-
-		var event = new Object();
-		event.id = events[i].id;
-		event.title = events[i].type;
-		event.time = events[i].created_at;
-
-		switch(event.title) {
-			case "FollowEvent":
-				event.title = "Following " + events[i].payload.target.name;
-				break;
+exports.gitTogetherEventObject = function(GEO){
+	var self = this;
+	
+	this.eventType = GEO.type;
+	this.owner = GEO.actor.login;
+	this.created_at = GEO.created_at;
+	this.payload = GEO.payload;
+	this.GEO = GEO;
+	
+	this.title = this.eventType + " by: " + this.owner;
+	this.message = "this type needs a description!";
+	
+	//TODO: implement all event types
+	this.processEvent = function(){
+		switch(self.eventType){
 			case "PushEvent":
-				event.title = "Pushed to " + events[i].repo.name;
+				self.message = self.payload.commits[0].message;
 				break;
-			case "WatchEvent":
-				event.title = "Watching " + events[i].repo.name;
-				
+			case "IssuesEvent":
+				self.message = self.payload.issue.body;
+				break;
+			case "CreateEvent":
+				self.message = self.payload.description;
 				break;
 			default:
-
+				break;
 		}
-
-		eventsFormatted.push(event);
 	}
-
-	return eventsFormatted;
+	this.processEvent();
 }
+

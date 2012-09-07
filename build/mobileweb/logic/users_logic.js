@@ -19,10 +19,14 @@ exports.getUser = function(username, callback) {
 exports.getEvents = function(username, callback) {
 
 	var event = require('lib/github/users/events');
-
+	var eventsFormatted = [];
+	
 	var events = ws.getRequest("users/" + username + "/events", function(events) {
 		Ti.API.debug("getEvents...");
-		var eventsFormatted = event.applyTemplate(events);
+		for(var i = 0; i < events.length; i++){
+			var Event = new event.gitTogetherEventObject(events[i]);
+			eventsFormatted.push(Event);
+		}
 		callback(eventsFormatted);
 	});
 	return eventsFormatted;

@@ -17,8 +17,6 @@ if (Ti.version < 1.8 ) {
 // This is a single context application with mutliple windows in a stack
 (function() {
 	//determine platform and form factor and render approproate components
-	var auth = require("logic/authentication_logic");
-	
 	var osname = Ti.Platform.osname,
 		version = Ti.Platform.version,
 		height = Ti.Platform.displayCaps.platformHeight,
@@ -28,18 +26,13 @@ if (Ti.version < 1.8 ) {
 	//yourself what you consider a tablet form factor for android
 	var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 	
-	var Window;
+	var Application;
 	if (isTablet) {
-		Window = require('ui/tablet/ApplicationWindow');
+		Application = require('ui/tablet/ApplicationWindow');
 	}
 	else {
-		Ti.API.debug("is valid token: " + auth.isValidToken());
-		if(auth.isValidToken()){
-			Window = require('ui/handheld/ApplicationWindow');
-		}
-		else{
-			Window = require('ui/handheld/LoginWindow');
-		}
+		Application = require('ui/handheld/HandheldApplication');
+		//Application = require('ui/handheld/LoginWindow');
 	}
-	new Window().open();
+	new Application().open();
 })();

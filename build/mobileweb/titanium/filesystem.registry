@@ -1,10 +1,10 @@
-ts	1342466628000
+ts	1346982363000
 Default-Landscape.jpg	36232
 Default-Portrait.jpg	28479
 Default.jpg	17184
 KS_nav_ui.png	1158
 KS_nav_views.png	1074
-app.js	1608
+app.js	1481
 appicon.png	19109
 apple-touch-icon-114x114-precomposed.png	15820
 apple-touch-icon-57x57-precomposed.png	6790
@@ -26,11 +26,11 @@ lib
 		sha1.js	5550
 	github
 		users
-			events.js	660
+			events.js	823
 logic
 	authentication_logic.js	1924
-	repo_logic.js	822
-	users_logic.js	697
+	repo_logic.js	1212
+	users_logic.js	810
 mobileweb
 	appicon.png	19109
 	apple_startup_images
@@ -93,7 +93,7 @@ titanium
 		IOStream.js	1119
 		Locale
 			en
-				i18n.js	109
+				i18n.js	143
 			ja
 				i18n.js	204
 		Locale.js	2276
@@ -205,8 +205,9 @@ ui
 	common
 		ApplicationTabGroup.js	623
 	handheld
-		ApplicationWindow.js	5287
-		EventsWindow.js	1947
+		ApplicationWindow.js	8066
+		DefaultEventsWindow.js	173
+		HandheldApplication.js	350
 		LoginWindow.js	2030
 	tablet
 		ApplicationWindow.js	546

@@ -3,26 +3,25 @@ var tableSize = 0;
 function ApplicationWindow(title) {
 	var repo = require("logic/repo_logic");
 	var user = require("logic/users_logic");
-	
+	var events = require('lib/github/users/events');
+
 	var applicationPrimaryWindow = Ti.UI.createWindow({
-		navBarHidden: true
+		navBarHidden : true
 	});
-	
+
 	var self = Ti.UI.createWindow({
 		title : L('Home_Page_Title'),
 		barColor : 'gray',
 		backgroundColor : 'white',
 		modal : true
 	});
-	
-	
-	
+
 	var nav = Ti.UI.iPhone.createNavigationGroup({
 		window : self
 	});
 
 	applicationPrimaryWindow.add(nav);
-	
+
 	var UserInfoContainerView = Ti.UI.createView({
 		height : 140
 	});
@@ -161,11 +160,22 @@ function ApplicationWindow(title) {
 		} else {
 			//TODO load event details window
 			//alert("event by: " + e.rowData.data.actor.login);
-			
+			var eventWindow;
+			switch(e.rowData.type) {
+				case "IssueEvent":
+					eventWindow = require('ui/handheld/DefaultEventsWindow');
+					break;
+				case "PushEvent":
+					eventWindow = require('ui/handheld/DefaultEventsWindow');
+					break;
+				default:
+					eventWindow = require('ui/handheld/DefaultEventsWindow');
+					break;
+			}
 
-			var eventWindow = require('ui/handheld/EventsWindow');
-
-			nav.open(eventWindow(e.rowData.data), {animated:true});
+			nav.open(eventWindow(e.rowData.data), {
+				animated : true
+			});
 		}
 	});
 
@@ -188,13 +198,17 @@ function ApplicationWindow(title) {
 					tableSize = repoEvents.length;
 
 					for (var i = 0; i < repoEvents.length; i++) {
+
+						var Event = new events.gitTogetherEventObject(repoEvents[i]);
+
 						var eventViewRow = Ti.UI.createTableViewRow({
 							selectedBackgroundColor : '#fff',
 							height : 100,
 							className : 'datarow',
 							clickname : 'row',
-							data : repoEvents[i]
+							data : Event
 						});
+
 						var eventNameLabel = Ti.UI.createLabel({
 							color : '#576996',
 							font : {
@@ -207,7 +221,7 @@ function ApplicationWindow(title) {
 							height : 30,
 							width : 200,
 							clickName : 'repoName',
-							text : repoEvents[i].type
+							text : Event.title
 						});
 
 						eventViewRow.add(eventNameLabel);
@@ -226,7 +240,7 @@ function ApplicationWindow(title) {
 							height : 50,
 							width : 200,
 							clickName : 'description',
-							text : repoEvents[i].actor.login //payload.commits[0].message
+							text : Event.message //payload.commits[0].message
 						});
 						eventViewRow.add(eventDescriptionLabel);
 
@@ -241,7 +255,7 @@ function ApplicationWindow(title) {
 								fontWeight : 'normal',
 								fontFamily : 'Arial'
 							},
-							text : repoEvents[i].created_at
+							text : Event.created_at
 						});
 						eventViewRow.add(eventUpdateLabel);
 						repoSettingsTableView.appendRow(eventViewRow, {
