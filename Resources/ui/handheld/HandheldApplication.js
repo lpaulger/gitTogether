@@ -3,7 +3,7 @@ var Window;
 function HandheldApplication(){
 	Ti.API.debug("is valid token: " + auth.isValidToken());
 	if(auth.isValidToken()){
-		Window = require('ui/handheld/ApplicationWindow');
+		Window = require('ui/handheld/ApplicationWindow/ApplicationWindow');
 	}
 	else{
 		Window = require('ui/handheld/LoginWindow');

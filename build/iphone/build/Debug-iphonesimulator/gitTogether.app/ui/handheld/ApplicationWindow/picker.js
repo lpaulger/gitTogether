@@ -1,0 +1,1 @@
+/Users/lpaulger/Documents/Titanium Studio Workspace/gitTogether/Resources/ui/handheld/ApplicationWindow/picker.js
